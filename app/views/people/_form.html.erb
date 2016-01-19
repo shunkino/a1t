@@ -1,0 +1,32 @@
+<%= form_for(@person) do |f| %>
+	<% if @person.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@person.errors.count, "error") %> prohibited this place from being saved:</h2>
+			<ul>
+				<% @person.errors.full_messages.each do |message| %>
+					<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<div class="field">
+		<%= f.label :personName, "ハンドルネーム" %><br>
+		<%= f.text_field :personName %>
+	</div>
+	<div class="field">
+		<%= f.label :twitter, "Twitter ID" %><br>
+		<%= f.text_field :twitter %>
+	</div>
+	<div class="field"> 
+		<%= f.label :password, "パスワード" %><br>
+		<%= f.password_field :password %>
+	</div>
+	<div class="field">
+		<%= f.label :password_confirmation, "パスワード再入力" %><br>
+		<%= f.password_field :password_confirmation %>
+	</div>
+	<div class="actions">
+		<%= f.submit %>
+	</div>
+<% end %>

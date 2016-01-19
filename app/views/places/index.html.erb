@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Places</h1>
+
+<table>
+	<thead>
+		<tr>
+			<th>Beaconuuid</th>
+			<th>Placename</th>
+			<th>Latitude</th>
+			<th>Longitude</th>
+			<th>Picturedata</th>
+			<th>Picturetype</th>
+			<th colspan="3"></th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<% @places.each do |place| %>
+			<tr>
+				<td><%= place.beaconUUID %></td>
+				<td><%= place.placeName %></td>
+				<td><%= place.latitude %></td>
+				<td><%= place.longitude %></td>
+				<b>Picture:</b>
+				<% if place.pictureData != "" %>
+					<%= image_tag picture_place_path(place), :height => '64' %>
+				<% else %>
+					<%= "画像がありません" %>
+				<% end %>
+				<td><%= link_to 'Show', place %></td>
+				<td><%= link_to 'Edit', edit_place_path(place) %></td>
+				<td><%= link_to 'Destroy', place, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Place', new_place_path %>

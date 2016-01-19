@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  beaconUUID: MyString
+  placeName: MyString
+  latitude: 1.5
+  longitude: 1.5
+  pictureData: 
+  pictureType: MyString
+
+two:
+  beaconUUID: MyString
+  placeName: MyString
+  latitude: 1.5
+  longitude: 1.5
+  pictureData: 
+  pictureType: MyString

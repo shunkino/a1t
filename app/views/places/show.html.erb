@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Beaconuuid:</strong>
+  <%= @place.beaconUUID %>
+</p>
+
+<p>
+  <strong>Placename:</strong>
+  <%= @place.placeName %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @place.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @place.longitude %>
+</p>
+<p>
+	<b>Picture:</b>
+	<% if @place.pictureData != "" %>
+		<%= image_tag picture_place_path(@place), :height => '64' %>
+	<% else %>
+		<%= "画像がありません" %>	
+	<% end %>
+</p>
+<% @place.people.each do |person| %>
+	<%= person.personName %>
+	<%= link_to "#{person.twitter}", "https://twitter.com/#{person.twitter}" %>
+<% end %>
+<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@place.latitude}%2C#{@place.longitude}" %>
+<%= link_to 'Edit', edit_place_path(@place) %> |
+<%= link_to 'Back', places_path %>
