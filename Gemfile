@@ -48,3 +48,4 @@ end
 
 gem 'geocoder', '1.2.14'
 gem 'bcrypt', '3.1.10'
+gem 'seed_dump'

@@ -12,6 +12,15 @@ class PlacesController < ApplicationController
   def show
   end
 
+	# GET /places/search.json
+  def search 
+		if params[:query] != nil
+			@places = Place.where("placeName like '%#{params[:query]}%'")	
+		else 
+			@places = nil
+		end 
+  end
+
   # GET /places/new
   def new
     @place = Place.new

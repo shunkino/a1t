@@ -1,4 +1,26 @@
+<%= javascript_include_tag "main.js" %>
 <p id="notice"><%= notice %></p>
+    <div id="header"></div>
+    <div id="main">
+      <div id="main_content">
+        <span class="main_content_txt" style="font-size:1.4em;opacity:0.8;">現在この場所にいる人数は</span><br>
+				<div class="main_content_txt_lcd"><%= @place.people.length %></div>
+        <div class="main_content_boxi">
+          Beacon UUID<br>
+					<span id="beacon_uuid" style="font-size:0.8em;opacity:0.8;"><%= @place.beaconUUID %></span><br>
+          Location<br>
+					<span id="beacon_loc" style="font-size:0.8em;opacity:0.8;"><%= @place.placeName %></span><br>          
+        </div>
+      </div>
+      <div id="member">
+        <span id="sec">この場所にいるユーザー</span>
+        <div class="line"></div>
+        <div id="member_main">
+          
+        </div>
+      </div>
+    </div>
+
 
 <p>
   <strong>Beaconuuid:</strong>

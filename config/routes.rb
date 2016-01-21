@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
+	root :to => "places#index"
   resources :people, :except => :show
   resources :places do
+		collection do
+			get :search
+		end
 		member do
 			get :picture
 		end

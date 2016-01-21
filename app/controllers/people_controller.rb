@@ -47,27 +47,41 @@ class PeopleController < ApplicationController
 
 	# ビーコン情報の変化
 	def refresh
-		puts "this is a test" + params[:placeUUID]
-		puts "hogehogeho " + params[:password]
 		# @person = Person.new(person_refresh)
-		@person = Person.find_by twitter: params[:twitter]
-		puts params[:twitter] 
-		# パスワードが正しければ,uuidからplace idを計算して情報を更新
-		if @person && @person.authenticate(params[:password])
-			place = Place.find_by beaconUUID: params[:placeUUID]
-			if @person.update(place_id: place.id)				
-				render :json => {"Success" => "データを書き込みました"}
+		if params[:placeUUID] != "0"
+			@person = Person.find_by twitter: params[:twitter]
+			puts params[:twitter] 
+			# パスワードが正しければ,uuidからplace idを計算して情報を更新
+			if @person && @person.authenticate(params[:password])
+				place = Place.find_by beaconUUID: params[:placeUUID]
+				if @person.update(place_id: place.id)				
+					render :json => {"Success" => "データを書き込みました"}
+				else
+					render :json => {"Error" => "Update失敗です"}
+				end
 			else
-				render :json => {"Error" => "Update失敗です"}
+				# パスワードが間違っている
+				render :json => {"Error" => "パスワードが間違っています"}
 			end
 		else
-			# パスワードが間違っている
-			render :json => {"Error" => "パスワードが間違っています"}
+			@person = Person.find_by twitter: params[:twitter]
+			puts params[:twitter] 
+			# パスワードが正しければplaceUUIDをそのままplace_idへといれる(検索で引っかからないように)
+			if @person && @person.authenticate(params[:password])
+				if @person.update(place_id: params[:placeUUID])				
+					render :json => {"Success" => "切断しました"}
+				else
+					render :json => {"Error" => "Update失敗です"}
+				end
+			else
+				# パスワードが間違っている
+				render :json => {"Error" => "パスワードが間違っています"}
+			end
 		end
 	end
 
 	# ユーザーを削除する Post
-  def destroy 
+	def destroy 
 		respond_to do |format|
 			if @person && @person.authenticate(params[:person][:password])
 				if @person.destroy
@@ -83,11 +97,8 @@ class PeopleController < ApplicationController
 				format.json { render json: @person.errors, status: :unprocessable_entity }
 			end	
 		end
+	end
 
-    respond_to do |format|
-          end
-  end
-	
 	private
 		def set_person
 			@person = Person.find(params[:id])

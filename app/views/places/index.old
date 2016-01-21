@@ -1,17 +1,6 @@
-<%= javascript_include_tag "search.js" %>
-
 <p id="notice"><%= notice %></p>
-<div id="header"></div>
-<div id="main">
-	<div id="member">
-		<span id="sec_search">場所を検索</span>
-		<input type="text" id="search_box"><br>
-		<span id="sec_place">あなたの行きたい場所は？</span>
-		<div class="line"></div>
-		<div id="place_main">
-		</div>
-	</div>
-</div>
+
+<h1>Listing Places</h1>
 
 <table>
 	<thead>
