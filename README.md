@@ -4,5 +4,6 @@
 
 ## 開発環境
 * Rails
+* vim
 
 WIP now.
