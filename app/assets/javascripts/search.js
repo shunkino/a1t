@@ -26,7 +26,7 @@ function get_and_make_view(input) {
             res.data.forEach(function(data, i) {
               if(i <= (res.size - 1)) {
                 str += generate_result_view({
-                  pic_url : "/places/"+data.id+"/picture",
+                  pic_url : location.host+"/places/"+data.id+"/picture",
                   name : data.placeName,
                   lat : data.latitude,
                   lon : data.longitude,

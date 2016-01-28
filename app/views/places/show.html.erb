@@ -1,58 +1,36 @@
 <%= javascript_include_tag "main.js" %>
+<style type="text/css">
+	body {
+		background-image: url(<%= "http://maps.google.com/maps/api/staticmap?size=640x640&sensor=false&zoom=16&markers=#{@place.latitude}%2C#{@place.longitude}".html_safe %>);
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: cover;
+		background-color: #464646;
+	}
+</style>
 <p id="notice"><%= notice %></p>
-    <div id="header"></div>
-    <div id="main">
-      <div id="main_content">
-        <span class="main_content_txt" style="font-size:1.4em;opacity:0.8;">現在この場所にいる人数は</span><br>
-				<div class="main_content_txt_lcd"><%= @place.people.length %></div>
-        <div class="main_content_boxi">
-          Beacon UUID<br>
-					<span id="beacon_uuid" style="font-size:0.8em;opacity:0.8;"><%= @place.beaconUUID %></span><br>
-          Location<br>
-					<span id="beacon_loc" style="font-size:0.8em;opacity:0.8;"><%= @place.placeName %></span><br>          
-        </div>
-      </div>
-      <div id="member">
-        <span id="sec">この場所にいるユーザー</span>
-        <div class="line"></div>
-        <div id="member_main">
-          
-        </div>
-      </div>
-    </div>
+<div id="header"></div>
+<div id="main">
+	<div id="main_content">
+		<span class="main_content_txt" style="font-size:1.4em;opacity:0.8;">現在この場所にいる人数は</span><br>
+		<div class="main_content_txt_lcd"><%= @place.people.length %></div>
+		<div class="main_content_boxi">
+			Beacon UUID<br>
+			<span id="beacon_uuid" style="font-size:0.8em;opacity:0.8;"><%= @place.beaconUUID %></span><br>
+			Location<br>
+			<span id="beacon_loc" style="font-size:0.8em;opacity:0.8;"><%= @place.placeName %></span><br>          
+		</div>
+	</div>
+	<div id="member">
+		<span id="sec">この場所にいるユーザー</span>
+		<%= link_to 'トップに戻る', places_path, :style => "float:right;" %>
+		<%= link_to '場所を編集', edit_place_path(@place), :style => "float:right; margin-right: 5px;"  %> 
+		<div class="line"></div>
+		<div id="member_main">
+
+		</div>
+	</div>
+</div>
 
 
-<p>
-  <strong>Beaconuuid:</strong>
-  <%= @place.beaconUUID %>
-</p>
-
-<p>
-  <strong>Placename:</strong>
-  <%= @place.placeName %>
-</p>
-
-<p>
-  <strong>Latitude:</strong>
-  <%= @place.latitude %>
-</p>
-
-<p>
-  <strong>Longitude:</strong>
-  <%= @place.longitude %>
-</p>
-<p>
-	<b>Picture:</b>
-	<% if @place.pictureData != "" %>
-		<%= image_tag picture_place_path(@place), :height => '64' %>
-	<% else %>
-		<%= "画像がありません" %>	
-	<% end %>
-</p>
-<% @place.people.each do |person| %>
-	<%= person.personName %>
-	<%= link_to "#{person.twitter}", "https://twitter.com/#{person.twitter}" %>
-<% end %>
-<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@place.latitude}%2C#{@place.longitude}" %>
-<%= link_to 'Edit', edit_place_path(@place) %> |
-<%= link_to 'Back', places_path %>
